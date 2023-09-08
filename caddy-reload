@@ -1,0 +1,3 @@
+#!/usr/bin/bash
+
+podman exec caddy caddy reload --config /etc/caddy/Caddyfile
