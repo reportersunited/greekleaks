@@ -1,0 +1,5 @@
+#!/usr/bin/bash
+
+GRLX_DIR=$(dirname $0)
+
+podman exec caddy caddy reload --config /etc/caddy/Caddyfile

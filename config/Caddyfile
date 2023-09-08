@@ -1,0 +1,26 @@
+# Options taken from https://caddyserver.com/docs/caddyfile/options
+{
+	email hunterdomson@protonmail.com
+}
+
+# Uncomment this line when running in production, and comment out the localhost
+# one below it.
+#greekleaks.reportersunited.gr
+http://localhost, http://127.0.0.1
+
+respond / "Greekleaks <3"
+
+header {
+	Strict-Transport-Security "max-age=63072000"
+	Cache-Control "max-age=0, no-cache, no-store, must-revalidate"
+	Pragma no-cache
+	Expires -1
+	X-Frame-Options DENY
+	X-XSS-Protection "1; mode=block"
+	X-Content-Type-Options nosniff
+	X-Download-Options noopen
+	X-Permitted-Cross-Domain-Policies master-only
+	Content-Security-Policy "default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; font-src 'self'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'"
+	Referrer-Policy "no-referrer"
+	Permissions-Policy "camera 'none'; display-capture 'none'; geolocation 'none'; microphone 'none'; payment 'none'; usb 'none';"
+}

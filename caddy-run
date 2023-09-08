@@ -1,0 +1,21 @@
+#!/usr/bin/bash
+
+GRLX_DIR=$(dirname $0)
+HTTP_PORT=8080
+HTTPS_PORT=8443
+
+podman run --rm --name caddy \
+    --security-opt no-new-privileges \
+    --cap-drop all \
+    --cap-add cap_net_bind_service \
+    --read-only \
+    --userns auto \
+    --label "io.containers.autoupdate=image"  \
+    -p ${HTTP_PORT}:80 \
+    -p ${HTTPS_PORT}:443 \
+    -v ${GRLX_DIR?}/config:/etc/caddy:ro \
+    -v caddy_data:/data \
+    -v caddy_config:/config \
+    -v ${GRLX_DIR?}/site:/usr/share/caddy:ro \
+    $@ \
+    docker.io/library/caddy
