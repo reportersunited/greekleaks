@@ -18,6 +18,7 @@ html {
     line-height: 1.5;
 
     scroll-behavior: smooth;
+    scroll-padding: 150px;
 }
 
 /* Reset some default styles */
@@ -174,49 +175,6 @@ footer .logo-ru {
     max-width: 80px;
 }
 
-/* Media queries for responsiveness */
-@media (max-width: 600px) {
-    .menu-toggle{
-        display: block;
-    }
-
-    .nav-links {
-        display: none;
-        width: 100%;
-        flex-direction: column;
-        order: 3;
-
-        padding: 1em;
-        background-color: #2d3d4c;
-        gap: 0.5em;
-
-        border-top: 1px solid #efece1;
-        box-shadow: 0 2px 5px rgba(0,0,0,.1);
-        -moz-box-shadow: 0 2px 5px rgba(0,0,0,.1);
-        -webkit-box-shadow: 0 2px 5px rgba(0,0,0,.1);
-    }
-
-    .nav-links:target{
-        display: flex;
-    }
-
-    .main-menu:target + .backdrop{
-        position: absolute;
-        display: block;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        z-index: 998;
-        background: #000;
-        background: rgba(0,0,0,.85);
-        cursor: default;
-    }
-
-    .hamburger-menu {
-        display: flex;
-    }
-}
 
 /* Collapsible styles */
 .collapsible {
@@ -266,8 +224,6 @@ details[open] .collapsible-header:after{
 /*    display: block;*/
 /*}*/
 
-
-
 .collapsible-title {
     font-weight: bold;
 }
@@ -280,27 +236,6 @@ details[open] .collapsible-header:after{
 .collapsible-content ul{
     margin: 0;
     padding-left: 1em;
-}
-
-/* Media queries for responsive design */
-@media only screen and (min-width: 768px) {
-    /* For full screen devices */
-    /*.container {*/
-    /*    display: flex;*/
-    /*    flex-wrap: wrap;*/
-    /*    align-items: flex-start;*/
-    /*}*/
-
-    /*.container .collapsible {*/
-    /*    width: calc(50% - 40px);*/
-    /*}*/
-}
-
-@media only screen and (max-width: 767px) {
-    /* For mobile devices */
-    /*.container .collapsible {*/
-    /*    width: 100%;*/
-    /*}*/
 }
 
 .flex {
@@ -335,6 +270,79 @@ ul.social-links{
 .social-links a span{
     /*display: none;*/
 }
+
+
+/* Media queries for responsiveness */
+@media (max-width: 600px) {
+    .menu-toggle{
+        display: block;
+    }
+
+    .nav-links {
+        display: none;
+        width: 100%;
+        flex-direction: column;
+        order: 3;
+
+        padding: 1em;
+        background-color: #2d3d4c;
+        gap: 0.5em;
+
+        border-top: 1px solid #efece1;
+        box-shadow: 0 2px 5px rgba(0,0,0,.1);
+        -moz-box-shadow: 0 2px 5px rgba(0,0,0,.1);
+        -webkit-box-shadow: 0 2px 5px rgba(0,0,0,.1);
+    }
+
+    .nav-links:target{
+        display: flex;
+    }
+
+    .main-menu:target + .backdrop{
+        position: absolute;
+        display: block;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 998;
+        background: #000;
+        background: rgba(0,0,0,.85);
+        cursor: default;
+    }
+
+    .hamburger-menu {
+        display: flex;
+    }
+
+    .grid--cols2 {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+/* Media queries for responsive design */
+@media only screen and (min-width: 768px) {
+    /* For full screen devices */
+    /*.container {*/
+    /*    display: flex;*/
+    /*    flex-wrap: wrap;*/
+    /*    align-items: flex-start;*/
+    /*}*/
+
+    /*.container .collapsible {*/
+    /*    width: calc(50% - 40px);*/
+    /*}*/
+}
+
+@media only screen and (max-width: 767px) {
+    /* For mobile devices */
+    /*.container .collapsible {*/
+    /*    width: 100%;*/
+    /*}*/
+}
+
 
 
 
