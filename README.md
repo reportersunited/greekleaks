@@ -1,6 +1,6 @@
 # Greekleaks
 
-[Greekleaks] is a whistleblowing platform that enables citizens to send
+[Greekleaks] is a whistleblowing platform that allows citizens to send
 tips anonymously and securely to [Reporters United], a network of reporters
 aiming to support investigative journalism in Greece.
 
