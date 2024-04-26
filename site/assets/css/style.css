@@ -29,6 +29,54 @@ body, h1, h2, p, ul, li {
     font-size: var(--text-fontsize);
 }
 
+strong, b{
+    font-weight: bold;
+}
+
+/* Code block styling */
+.code-block {
+    background-color: #f6f8fa;
+    color: #24292e;
+    border: 1px solid #e1e4e8;
+    border-radius: 3px;
+    font-family: monospace;
+    padding: 4px 3px;
+    margin: 10px 0px;
+    overflow-x: auto;
+    font-size: 85%;
+}
+
+.code-block code {
+    display: inline-block;
+    min-width: 100%;
+}
+
+/* Envelope styling */
+.envelope {
+    font-family: 'Courier New', monospace;
+    font-size: 85%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f6f8fa;
+    color: #24292e;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 5px auto;
+    margin-bottom: 10px;
+}
+
+/* Signal number styling */
+.signal-number {
+    background-color: #f6f8fa;
+    color: #24292e;
+    border: 1px solid #e1e4e8;
+    border-radius: 3px;
+    font-family: monospace;
+    padding: 4px 3px;
+    margin: 10px 0px;
+    font-size: 85%;
+    /*text-align: center;*/
+}
 
 /* Header styles */
 body > header {
@@ -65,15 +113,17 @@ img {
 
 a {
     color: var(--link-color);
-    text-decoration: none;
+    /*color: currentColor;*/
+    text-decoration: underline;
+    text-underline-offset: 2px;
 }
 
 .nav-links {
     display: flex;
     font-size: 0.875rem;
     font-weight: 400;
-
     gap: 15px;
+    align-items: center;
 }
 
 .nav-links a {
@@ -87,6 +137,18 @@ a {
 
 .nav-links a:hover{
     color: var(--link-color);
+}
+
+a:hover > img{
+    filter: brightness(3);
+}
+
+.lang-menu a{
+    text-decoration: none;
+}
+.lang-menu span{
+    text-decoration: underline;
+    text-underline-offset: 2px;
 }
 
 /* Hamburger menu styles */
@@ -136,19 +198,46 @@ section {
 section + section{
     border-top: 1px solid rgba(239,236,225,0.1);
 }
+
 section.intro{
     margin-top: 80px;
 }
-.intro h1{
-    color: white;
-    font-weight: 400;
+section.intro > .container{
+    max-width: 800px;
+}
+section.intro header{
+    background: url('../img/greekleaks-cta.png') no-repeat center;
+
+    /*background-size: clamp(300px, 100%, 575px) auto;*/
+    background-size: min(100%, 575px) auto;
+
+    width: 100%;
+
+    aspect-ratio: 319 / 235;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    gap: 25px;
 }
 
-section header img{
-    margin-inline: auto;
-    display: block;
-    margin-block: 1em;
+.intro h1, .intro h2{
+    color: white;
+    font-weight: 700;
+    text-shadow: 0 3px 6px #00000081;
 }
+
+.intro h1{
+    font-size: 26px;
+    line-height: 1.14;
+
+}
+.intro h2{
+    font-size: 18px;
+    line-height: 1.19;
+}
+
 
 h1 {
     font-weight: bold;
@@ -163,6 +252,34 @@ h2 {
 p {
     margin-bottom: 10px;
 }
+
+.icon-nav{
+    max-width: 1200px;
+    display: flex;
+    justify-content: space-between;
+    margin-inline: auto;
+    gap: 25px;
+    align-items: center;
+}
+
+.icon-nav img{
+    height: 45px;
+    width: auto;
+}
+
+section header img{
+    margin-inline: auto;
+    display: block;
+    margin-block: 1em;
+    height: 45px;
+    width: auto;
+}
+
+.icon-nav img.icon-taxidromio,
+section header img.icon-taxidromio{
+    height: 36px;
+}
+
 
 /* Footer styles */
 footer {
@@ -189,9 +306,11 @@ footer .logo-ru {
     width: 100%;
     /*margin: 20px;*/
 }
-.faq .collapsible+.collapsible{
+.collapsible+.collapsible{
     margin-top: 1em;
 }
+
+
 
 
 
@@ -278,6 +397,7 @@ ul.social-links{
 }
 
 
+
 /* Media queries for responsiveness */
 @media (max-width: 600px) {
     .menu-toggle{
@@ -325,6 +445,13 @@ ul.social-links{
         grid-template-columns: 1fr;
     }
 
+    .icon-nav img,
+    .icon-nav img.icon-taxidromio,
+    section header img.icon-taxidromio{
+        height: auto;
+        width: auto;
+    }
+
 }
 
 
@@ -340,7 +467,20 @@ ul.social-links{
     /*.container .collapsible {*/
     /*    width: calc(50% - 40px);*/
     /*}*/
+
+    .intro h1{
+        font-size: 42px;
+    }
+    .intro h2{
+        font-size: 26px;
+    }
+
+    .lang-menu{
+        margin-left: 25px;
+    }
+
 }
+
 
 @media only screen and (max-width: 767px) {
     /* For mobile devices */
@@ -348,8 +488,3 @@ ul.social-links{
     /*    width: 100%;*/
     /*}*/
 }
-
-
-
-
-
