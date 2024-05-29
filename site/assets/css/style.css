@@ -42,13 +42,12 @@ strong, b{
     font-family: monospace;
     padding: 4px 3px;
     margin: 10px 0px;
-    overflow-x: auto;
     font-size: 85%;
 }
 
 .code-block code {
-    display: inline-block;
     min-width: 100%;
+    word-wrap: break-word;
 }
 
 /* Envelope styling */
