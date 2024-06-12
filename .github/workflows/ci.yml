@@ -1,0 +1,51 @@
+# This GitHub action downloads anonymously via Tor the whole Greekleaks website,
+# and checks that each file matches the commited one.
+
+name: "Verify the integrity of Greekleaks"
+on:
+  push:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 */4 * * *'
+
+jobs:
+  verify-resource-integrity:
+    name: "Download and compare all resources"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Tor
+        uses: tor-actions/setup-tor@main
+        with:
+          stable: true
+          daemon: true
+
+      - name: Install torsocks
+        run: sudo apt-get update && sudo apt-get install -y torsocks
+
+      - name: Recursively download the site
+        run: |
+          # The user agent that will be used by the CI, which is also used by
+          # the Tor browser.
+          export USER_AGENT="Mozilla/5.0 (Windows NT 10.0; rv:109.0) Gecko/20100101 Firefox/115.0"
+
+          # Recursively download the site.
+          torsocks wget --page-requisites --no-parent -r --user-agent "$USER_AGENT" \
+              https://reportersunited.gr/greekleaks/
+
+          # Download some extra assets that `wget` misses.
+          for path in \
+              android-chrome-192x192.png \
+              android-chrome-512x512.png \
+              assets/img/greekleaks-cta.jpg \
+              favicon.ico;
+          do
+              torsocks curl -A "$USER_AGENT" \
+                  https://reportersunited.gr/greekleaks/${path} \
+                  > reportersunited.gr/greekleaks/${path}
+          done
+
+      - name: Check that the downloaded site matches the committed one
+        run: |
+          diff -r site/ reportersunited.gr/greekleaks/
