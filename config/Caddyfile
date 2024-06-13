@@ -5,7 +5,7 @@
 
 # Uncomment this line when running in production, and comment out the localhost
 # one below it.
-#greekleaks.reportersunited.gr
+#greekleaks.reportersunited.gr, greekleaks.org
 http://localhost, http://127.0.0.1
 
 root * /usr/share/caddy
