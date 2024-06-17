@@ -454,7 +454,7 @@ ul.social-links{
 
 
 /* Media queries for responsive design */
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 960px) {
     /* For full screen devices */
     /*.container {*/
     /*    display: flex;*/
@@ -498,7 +498,8 @@ ul.social-links{
     }
 
     .lang-menu{
-        margin-left: 25px;
+        /*margin-left: 25px;*/
+        margin-left: 5px;
     }
 
     .menu-container .collapsible-header{
