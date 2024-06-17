@@ -3,7 +3,6 @@
 
 name: "Verify the integrity of Greekleaks"
 on:
-  push:
   workflow_dispatch:
   schedule:
     - cron: '0 */4 * * *'
