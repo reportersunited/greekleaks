@@ -2,6 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+
+    <meta property="og:title" content="greekleaks" />
+    <meta property="og:description" content="greekleaks - The first open platform for whistleblowers in Greece." />
+    <meta property="og:image" content="https://reportersunited.gr/greekleaks/assets/img/greekleaks-social-image-en.png" />
+    <meta property="og:url" content="https://reportersunited.gr/greekleaks/en/" />
+
     <title>greekleaks</title>
     <meta name="description" content="greekleaks - The first open platform for whistleblowers in Greece">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -28,34 +34,42 @@
             </a>
         </div>
 
-        <nav id="main-menu" class="nav-links">
-            <a href="#methodoi-epikoinonias">BLOW THE WHISTLE</a>
-            <a href="#faq">FAQ</a>
-            <a href="https://www.reportersunited.gr/" target="_blank" rel="noreferrer"><span>REPORTERS UNITED ↗</span></a>
-            <a href="https://www.reportersunited.gr/ypostirixi/" target="_blank" rel="noreferrer"><span>SUPPORT US ↗</span></a>
+        <div class="menu-container">
 
-            <span class="lang-menu">
-                <span class="lang-en">EN</span> |
-                <a href="../" class="lang-el">ΕΛ</a>
-            </span>
-        </nav>
+            <button popovertarget="main-menu" popovertargetaction="toggle" class="menu-toggle" aria-label="burger menu trigger">
+                <div class="hamburger-menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </button>
 
-        <a href="#main-menu" id="main-menu-toggle" class="menu-toggle" aria-label="burger menu trigger">
-            <div class="hamburger-menu">
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </a>
+            <nav id="main-menu" popover="auto">
+                <ul class="nav-links">
+                    <li>
+                        <a href="#methodoi-epikoinonias">BLOW THE WHISTLE</a>
+                    </li>
+                    <li>
+                        <a href="#faq">FAQ</a>
+                    </li>
+                    <li>
+                        <a href="https://www.reportersunited.gr/" target="_blank" rel="noreferrer"><span>REPORTERS UNITED ↗</span></a>
+                    </li>
+                    <li>
+                        <a href="https://www.reportersunited.gr/ypostirixi/" target="_blank" rel="noreferrer"><span>SUPPORT US ↗</span></a>
+                    </li>
+                    <li class="lang-menu">
+                        <span class="lang-en">EN</span> |
+                        <a href="../" class="lang-el">ΕΛ</a>
+                    </li>
+                </ul>
+            </nav>
+
+        </div>
 
     </div>
 
-    <a href="#main-menu-toggle"
-       class="backdrop"
-       tabindex="-1"
-       aria-hidden="true" hidden>
-    </a>
 
 </header>
 
@@ -457,7 +471,9 @@
     </p>
 
     <p>
-        <img class="logo-ru" src="../assets/img/ru-logo.png" height="110" width="250" alt="Reporters United logo" />
+        <a href="https://www.reportersunited.gr/en/" target="_blank">
+            <img class="logo-ru" src="../assets/img/ru-logo.png" height="110" width="250" alt="Reporters United logo" />
+        </a>
     </p>
 
     <p>
