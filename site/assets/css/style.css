@@ -41,7 +41,7 @@ strong, b{
     border-radius: 3px;
     font-family: monospace;
     padding: 4px 3px;
-    margin: 10px 0px;
+    margin: 10px 0;
     font-size: 85%;
 }
 
@@ -72,7 +72,7 @@ strong, b{
     border-radius: 3px;
     font-family: monospace;
     padding: 4px 3px;
-    margin: 10px 0px;
+    margin: 10px 0;
     font-size: 85%;
     /*text-align: center;*/
 }
@@ -400,10 +400,9 @@ ul.social-links{
 
 .nav-links {
     /*display: flex;*/
-    font-size: 0.875rem;
-    font-weight: 400;
-    gap: 15px;
-    align-items: center;
+
+    /*gap: 15px;*/
+    /*align-items: center;*/
     list-style: none;
 
     /*position: relative;*/
@@ -418,7 +417,13 @@ ul.social-links{
 .nav-links li{
     display: block;
     text-align: center;
+
+    font-size: 0.875rem;
+    font-weight: 400;
+
+    padding: 8px;
 }
+
 
 .nav-links a {
     /*margin-left: 15px;*/
