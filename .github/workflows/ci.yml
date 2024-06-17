@@ -38,6 +38,8 @@ jobs:
               android-chrome-192x192.png \
               android-chrome-512x512.png \
               assets/img/greekleaks-cta.jpg \
+              assets/img/greekleaks-social-image-el.png \
+              assets/img/greekleaks-social-image-en.png \
               favicon.ico;
           do
               torsocks curl -A "$USER_AGENT" \
