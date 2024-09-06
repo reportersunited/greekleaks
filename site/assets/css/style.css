@@ -77,6 +77,25 @@ strong, b{
     /*text-align: center;*/
 }
 
+/* Warning box styling */
+.warning-box {
+    display: flex;
+    align-items: center;
+    background-color: #2d3d4c;
+    padding: 10px;
+    border: 1px solid;
+    border-radius: 5px;
+}
+
+.warning-icon {
+    margin-right: 10px;
+    font-size: 20px;
+}
+
+.warning-text {
+    font-weight: bold;
+}
+
 /* Header styles */
 body > header {
     position: fixed;
@@ -246,9 +265,6 @@ section.intro header{
     text-align: center;
     gap: 25px;
 }
-
-
-
 
 .intro h1, .intro h2{
     color: white;
@@ -583,6 +599,3 @@ ul.social-links{
     }
 
 }
-
-
-
