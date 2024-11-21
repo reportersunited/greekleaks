@@ -23,29 +23,35 @@ jobs:
       - name: Install torsocks
         run: sudo apt-get update && sudo apt-get install -y torsocks
 
+      # Retry this step in case of failures (3 attempts with a 3 minute delay).
+      # Failures can be benign when the Tor weather is particularly "cloudy".
       - name: Recursively download the site
-        run: |
-          # The user agent that will be used by the CI, which is also used by
-          # the Tor browser.
-          export USER_AGENT="Mozilla/5.0 (Windows NT 10.0; rv:109.0) Gecko/20100101 Firefox/115.0"
+        uses: Wandalen/wretry.action@master
+        with:
+          attempt_limit: 3
+          attempt_delay: 300000  # 3 minutes delay between attempts
+          command : |
+            # The user agent that will be used by the CI, which is also used by
+            # the Tor browser.
+            export USER_AGENT="Mozilla/5.0 (Windows NT 10.0; rv:109.0) Gecko/20100101 Firefox/115.0"
 
-          # Recursively download the site.
-          torsocks wget --page-requisites --no-parent -r --user-agent "$USER_AGENT" \
-              https://reportersunited.gr/greekleaks/
+            # Recursively download the site.
+            torsocks wget --page-requisites --no-parent -r --user-agent "$USER_AGENT" \
+                https://reportersunited.gr/greekleaks/
 
-          # Download some extra assets that `wget` misses.
-          for path in \
-              android-chrome-192x192.png \
-              android-chrome-512x512.png \
-              assets/img/greekleaks-cta.jpg \
-              assets/img/greekleaks-social-image-el.png \
-              assets/img/greekleaks-social-image-en.png \
-              favicon.ico;
-          do
-              torsocks curl -A "$USER_AGENT" \
-                  https://reportersunited.gr/greekleaks/${path} \
-                  > reportersunited.gr/greekleaks/${path}
-          done
+            # Download some extra assets that `wget` misses.
+            for path in \
+                android-chrome-192x192.png \
+                android-chrome-512x512.png \
+                assets/img/greekleaks-cta.jpg \
+                assets/img/greekleaks-social-image-el.png \
+                assets/img/greekleaks-social-image-en.png \
+                favicon.ico;
+            do
+                torsocks curl -A "$USER_AGENT" \
+                    https://reportersunited.gr/greekleaks/${path} \
+                    > reportersunited.gr/greekleaks/${path}
+            done
 
       - name: Check that the downloaded site matches the committed one
         run: |
