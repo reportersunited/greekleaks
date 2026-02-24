@@ -1,6 +1,8 @@
 # Options taken from https://caddyserver.com/docs/caddyfile/options
 {
-	email hunterdomson@protonmail.com
+	email admin@reportersunited.gr
+	admin unix///tmp/caddy-admin.sock
+
 }
 
 # Uncomment this line when running in production, and comment out the localhost
