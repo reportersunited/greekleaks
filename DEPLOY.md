@@ -2,7 +2,7 @@
 
 ## Locally
 
-First install Podman. Then, you you can clone this repo and run:
+First install [Podman]. Then, you you can clone this repo and run:
 
 ```
 ./caddy-run
@@ -19,68 +19,40 @@ If you want to make changes to the site's configuration (see
 ## Production
 
 Deploying Greekleaks to production requires spinning a Systemd service for it
-properly. Basically, you need to do the following:
+properly.
 
-* Proxy traffic from 80 -> 8080 and 443 -> 8443 using iptables
-* Create a separate user with no password or any privileges. We'll use `grlx`
-  for this purpose.
-* Edit the Caddyfile to use the proper host
-* Install the Systemd service
-* Enable auto-updates
+First install some requirements:
 
-Here are the steps in more detail:
-
-Proxy traffic using `iptables`. The following redirects either local or external
-traffic from ports 80/443 to local ports 8080/8443.
-
-```
-sudo iptables -t nat -I PREROUTING -p tcp -i eth0 --dport 443 -j REDIRECT --to-ports 8443
-sudo iptables -t nat -I PREROUTING -p tcp -i eth0 --dport 80 -j REDIRECT --to-ports 8080
-sudo iptables -t nat -I OUTPUT -p tcp -o lo --dport 443 -j REDIRECT --to-ports 8443
-sudo iptables -t nat -I OUTPUT -p tcp -o lo --dport 80 -j REDIRECT --to-ports 8080
+```shell
+sudo apt install podman git
 ```
 
-> [!IMPORTANT]
-> These rules must be persisted, either with `iptables-save`, `ufw`, etc.
-> Alternatively, you can allow Podman to bind to ports < 1024, and update the
-> `./caddy-run` file accordingly.
+Then configure a range of subUIDs / subGIDs that [Podman] can use to create a
+namespace that will **not** contain the root user (see [`userns=auto`]).
 
-Create a new user, enable login lingering and switch to that user:
-
-```
-sudo useradd -m grlx
-sudo loginctl enable-linger grlx
-sudo -iu grlx bash
+```shell
+echo "containers:2000000:65536" | sudo tee -a /etc/sub{u,g}id
 ```
 
-> [!NOTE]
-> You can alternatively run the `caddy-run` command as the root user, since we
-> spin the container with [`userns=auto`], which also runs the container in
-> an unprivileged namespace. The caveat is that everything outside the container
-> runs as root, including the image pulling. This may be a viable alternative
-> depending on your threat model.
+Clone this repo under `/var/local/greekleaks`:
 
-Clone or copy the repo to the user's home dir (`/home/grlx/greekleaks`).  Edit
-the Caddyfile (`~/greekleaks/config/Caddyfile`), uncomment the
-`greekleaks.reportersunited.gr` line, and comment out the localhost one. Then
-install the Systemd unit for Greekleaks:
-
-```
-mkdir -p ~/.config/systemd/user
-cp ~/greekleaks/greekleaks.service ~/.config/systemd/user
-export XDG_RUNTIME_DIR=/run/user/$(id -u)
-systemctl --user daemon-reload
-systemctl --user enable greekleaks
-systemctl --user start greekleaks
+```shell
+sudo mkdir /var/local/greekleaks
+sudo chown $(id -u):$(id -g) /var/local/greekleaks/
+git clone https://github.com/reportersunited/greekleaks /var/local/greekleaks/
 ```
 
-Enable image auto-updates:
+Proceed to edit `config/Caddyfile` in order to set your own domain name.
+Finally, enable and start the Systemd unit for Greekleaks, which is bundled as a
+[Quadlet]:
 
 ```
-cp /usr/lib/systemd/system/podman-auto-update.{timer,service} ~/.config/systemd/user
-systemctl --user enable podman-auto-update.timer
-systemctl --user start podman-auto-update.timer
+sudo mkdir /etc/containers/systemd
+sudo cp /var/local/greekleaks/greekleaks.container /etc/containers/systemd/
+sudo systemctl daemon-reload
+sudo systemctl start greekleaks
 ```
 
 [Podman]: https://podman.io/
 [`userns=auto`]: https://www.redhat.com/sysadmin/rootless-podman-user-namespace-modes
+[Quadlet]: https://docs.podman.io/en/latest/markdown/podman-systemd.unit.5.html
