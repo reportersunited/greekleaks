@@ -49,7 +49,10 @@ Finally, enable and start the Systemd unit for Greekleaks, which is bundled as a
 ```
 sudo mkdir /etc/containers/systemd
 sudo cp /var/local/greekleaks/greekleaks.container /etc/containers/systemd/
+sudo systemctl enable podman-auto-update.timer
+sudo systemctl enable greekleaks
 sudo systemctl daemon-reload
+sudo systemctl start podman-auto-update.timer
 sudo systemctl start greekleaks
 ```
 
